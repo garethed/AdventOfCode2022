@@ -1,0 +1,21 @@
+class Day5 : DayWithInputFile<Int, String>() {
+
+    override fun tests() {
+        test(::part1Impl, 0, testData)
+        test(::part2Impl, 0, testData)
+    }
+
+    override fun parseInput(input: String): String {
+        return input
+    }
+
+    override fun part1Impl(input: String): Int {
+        return 0
+    }
+
+    override fun part2Impl(input: String): Int {
+        return 0
+    }
+
+    var testData = """"""
+}

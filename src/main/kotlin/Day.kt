@@ -31,8 +31,8 @@ abstract class Day<ReturnType,InputType> : AoC {
             println("Test: ".red() + "${input.toString().take(40)}".white() + "-> $actual but should be $expected".red());
         }
     }
-    fun test(func: (InputType) -> ReturnType, expected: ReturnType, input: String) {
-        test(func, expected, parseInput(input))
+    fun test(func: (InputType) -> ReturnType, expected: ReturnType, unparsedInput: String) {
+        test(func, expected, parseInput(unparsedInput))
     }
 
     private fun <T>time(func:() -> (T) ) : T {
