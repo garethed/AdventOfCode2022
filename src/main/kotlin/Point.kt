@@ -14,6 +14,12 @@ data class Point(val x:Int, val y:Int) {
             val parts = string.split(",").map { parseInt(it) }
             return Point(parts[0], parts[1])
         }
+
+        val directions = arrayOf(Point(1, 0), Point(-1, 0), Point(0, 1), Point(0, -1))
+    }
+
+    operator fun plus(other:Point) : Point {
+        return Point(x + other.x, y + other.y)
     }
 }
 
@@ -37,20 +43,34 @@ class Grid(val w:Int, val h:Int, val data : Array<IntArray>? = null) {
         }
     }
 
+    fun toEdge(p:Point, d:Point) : Sequence<Point> {
+        var next = p + d
+        return sequence {
+            while (contains(next)) {
+                yield(next)
+                next += d
+            }
+        }
+    }
+
+    fun contains(p:Point) : Boolean {
+        return p.x >= 0 && p.y >= 0 && p.x < w && p.y < h
+    }
+
     fun adjacent(p:Point): Sequence<Point> {
-        return p.adjacent.filter { it.x >= 0 && it.y >= 0 && it.x < w && it.y < h }
+        return p.adjacent.filter { contains(it) }
     }
 
     fun adjacentWithDiagonals(p:Point): Sequence<Point> {
-        return p.adjacentWithDiagonals.filter { it.x >= 0 && it.y >= 0 && it.x < w && it.y < h }
+        return p.adjacentWithDiagonals.filter { contains(it) }
     }
 
 
-    fun v(p:Point) : Int {
+    operator fun get(p:Point) : Int {
         return data!![p.y][p.x]
     }
 
-    fun v(p:Point, i:Int) {
+    operator fun set(p:Point, i:Int) {
         data!![p.y][p.x] = i
     }
 }

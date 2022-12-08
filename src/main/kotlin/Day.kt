@@ -41,6 +41,7 @@ abstract class Day<ReturnType,InputType> : AoC {
         print("($time ms) ")
         return result
     }
+
 }
 
 abstract class DayWithInputFile<ReturnType,InputType> : Day<ReturnType,InputType>() {
