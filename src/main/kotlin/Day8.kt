@@ -8,7 +8,7 @@ class Day8 : DayWithInputFile<Int, Grid>() {
     override fun parseInput(input: String): Grid {
         return Grid(input
             .lines()
-            .map { it.map { c -> c.toString().toInt() }.toIntArray() }
+            .map { it.map { c -> c.digitToInt() }.toIntArray() }
             .toTypedArray())
     }
 

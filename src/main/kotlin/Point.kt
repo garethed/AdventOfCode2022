@@ -1,4 +1,5 @@
 import java.lang.Integer.parseInt
+import kotlin.math.sign
 
 data class Point(val x:Int, val y:Int) {
 
@@ -16,10 +17,36 @@ data class Point(val x:Int, val y:Int) {
         }
 
         val directions = arrayOf(Point(1, 0), Point(-1, 0), Point(0, 1), Point(0, -1))
+        val Up = Point(0,1)
+        val Down = Point(0,-1)
+        val Left = Point(-1,0)
+        val Right = Point(1, 0)
+
+        fun direction(char: Char): Point {
+            return when (char) {
+                'U' -> Up
+                'D' -> Down
+                'L' -> Left
+                'R' -> Right
+                else -> throw Exception()
+            }
+        }
     }
 
     operator fun plus(other:Point) : Point {
         return Point(x + other.x, y + other.y)
+    }
+
+    operator fun times(factor: Int): Point {
+        return Point(x * factor, y * factor)
+    }
+
+    operator fun minus(other: Point): Point {
+        return this + (other * -1)
+    }
+
+    fun sign() : Point {
+        return Point(x.sign, y.sign)
     }
 }
 
