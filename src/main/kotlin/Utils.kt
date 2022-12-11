@@ -47,6 +47,13 @@ fun getInput(day:Int): String {
     return file.readText();
 }
 
+fun extractGroupsFromRegex(regex:String, target:String) : List<String> {
+    val result = regex.toRegex().find(target)
+    assert(result!!.groups[0]!!.value == target)
+
+    return result.groups.drop(1).map { it!!.value }
+}
+
 private fun getFolder(): Path {
     return Path.of(File(
         Day1::class.java.protectionDomain.codeSource.location.toURI()
@@ -77,3 +84,5 @@ private fun downloadInput(day: Int): String {
 
     return client.send(req, HttpResponse.BodyHandlers.ofString()).body()
 }
+
+
