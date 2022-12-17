@@ -56,7 +56,7 @@ data class Rect(val xmin:Int, val xmax:Int, val ymin:Int, val ymax:Int) {
     }
 }
 
-class Grid(val w:Int, val h:Int, val data : Array<IntArray>? = null) {
+class Grid(val w:Int, val h:Int, val data : Array<IntArray>? = Array(h) { IntArray(w)}) {
 
     constructor(array: Array<IntArray>?) : this(array!![0].size, array.size, array)
 
@@ -99,6 +99,14 @@ class Grid(val w:Int, val h:Int, val data : Array<IntArray>? = null) {
 
     operator fun set(p:Point, i:Int) {
         data!![p.y][p.x] = i
+    }
+
+    operator fun get(x:Int, y:Int) : Int {
+        return data!![y][x]
+    }
+
+    operator fun set(x:Int, y:Int, v:Int)  {
+        data!![y][x] = v
     }
 }
 
